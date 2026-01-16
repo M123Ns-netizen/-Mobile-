@@ -1,0 +1,1351 @@
+<!-- ملف: index.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مواصفات الأجهزة الإلكترونية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        /* شريط البحث */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .search-box button:hover {
+            background: var(--secondary);
+        }
+
+        /* فئات الأجهزة */
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* بطاقات الأجهزة */
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 3rem 0;
+        }
+
+        .device-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-image {
+            height: 220px;
+            background: linear-gradient(45deg, #e0f2fe, #f0f9ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .device-image img {
+            max-height: 180px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .device-info {
+            padding: 1.5rem;
+        }
+
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .device-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .device-brand {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .device-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .device-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-value {
+            font-weight: 600;
+        }
+
+        .device-specs-summary {
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .spec-label {
+            color: var(--gray);
+        }
+
+        .spec-value {
+            font-weight: 600;
+        }
+
+        .device-colors {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #e2e8f0;
+            cursor: pointer;
+        }
+
+        .device-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* صفحة تفاصيل الجهاز */
+        .device-detail-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .device-detail-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .device-detail-image {
+            flex: 1;
+            max-width: 400px;
+            background: linear-gradient(45deg, #e0f2fe, #f0f9ff);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .device-detail-image img {
+            max-width: 100%;
+            max-height: 400px;
+        }
+
+        .device-detail-info {
+            flex: 2;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .specs-table th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: right;
+            border-bottom: 2px solid #e2e8f0;
+            color: var(--dark);
+        }
+
+        .specs-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .specs-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* التجاوبية */
+        @media (max-width: 768px) {
+            .device-detail-header {
+                flex-direction: column;
+            }
+            
+            .device-detail-image {
+                max-width: 100%;
+            }
+            
+            .categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+
+        /* أنيميشن للتحديث */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>مواصفات الأجهزة الإلكترونية</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى الصفحة الرئيسية -->
+    <main class="container">
+        <!-- شريط البحث -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن جهاز أو ماركة...">
+                <button id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- فئات الأجهزة -->
+        <div class="categories" id="categoriesContainer">
+            <!-- سيتم إضافة الفئات ديناميكياً -->
+        </div>
+
+        <!-- عرض الأجهزة -->
+        <div id="devicesContainer" class="devices-grid">
+            <!-- سيتم إضافة الأجهزة ديناميكياً -->
+        </div>
+
+        <!-- صفحة تفاصيل الجهاز (مخفية في البداية) -->
+        <div id="deviceDetailPage" class="device-detail-container" style="display: none;">
+            <!-- سيتم ملؤها ديناميكياً -->
+        </div>
+    </main>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>مواصفات الأجهزة الإلكترونية</h3>
+                    <p>المصدر الأكثر دقة وحداثة لمواصفات الأجهزة التقنية</p>
+                </div>
+                <div>
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li>الهواتف الذكية</li>
+                        <li>اللابتوبات</li>
+                        <li>الأجهزة اللوحية</li>
+                        <li>الساعات الذكية</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>التواصل</h3>
+                    <p>support@devicespecs.com</p>
+                    <p>+966 123 456 789</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="devices-database.js"></script>
+    <script>
+        // دالة لعرض جميع الأجهزة
+        function displayDevices(devices) {
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            // إخفاء صفحة التفاصيل
+            detailPage.style.display = 'none';
+            
+            // إظهار قائمة الأجهزة
+            container.style.display = 'grid';
+            
+            container.innerHTML = devices.map(device => `
+                <div class="device-card fade-in" data-id="${device.id}">
+                    <div class="device-image">
+                        <img src="placeholder.svg" alt="${device.name}" onerror="this.src='https://via.placeholder.com/300x200/3b82f6/ffffff?text=${encodeURIComponent(device.brand)}'">
+                    </div>
+                    <div class="device-info">
+                        <div class="device-header">
+                            <div>
+                                <h3 class="device-name">${device.name}</h3>
+                                <p class="device-brand">${device.brand}</p>
+                            </div>
+                            <div class="device-price">${device.price} ${device.currency}</div>
+                        </div>
+                        
+                        <div class="device-rating">
+                            <div class="stars">
+                                ${'★'.repeat(Math.floor(device.rating))}${'☆'.repeat(5-Math.floor(device.rating))}
+                            </div>
+                            <span class="rating-value">${device.rating}</span>
+                        </div>
+                        
+                        <div class="device-specs-summary">
+                            ${Object.entries(device.specs.الأداء || device.specs.الأداء || {}).slice(0, 3).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key}:</span>
+                                    <span class="spec-value">${Array.isArray(value) ? value[0] : value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${device.colors ? `
+                            <div class="device-colors">
+                                ${device.colors.map(color => `
+                                    <div class="color-dot" style="background-color: ${getColorCode(color)}" title="${color}"></div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="device-actions">
+                            <button class="btn btn-primary" onclick="showDeviceDetail(${device.id})">
+                                <i class="fas fa-info-circle"></i> التفاصيل
+                            </button>
+                            <button class="btn btn-secondary" onclick="addToCompare(${device.id})">
+                                <i class="fas fa-balance-scale"></i> مقارنة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // دالة لعرض تفاصيل الجهاز
+        function showDeviceDetail(deviceId) {
+            const device = electronicDevices.getDeviceById(deviceId);
+            if (!device) return;
+            
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            // إخفاء قائمة الأجهزة
+            container.style.display = 'none';
+            
+            // إظهار صفحة التفاصيل
+            detailPage.style.display = 'block';
+            detailPage.innerHTML = `
+                <button class="btn btn-secondary" onclick="goBackToList()" style="margin-bottom: 20px;">
+                    <i class="fas fa-arrow-right"></i> العودة للقائمة
+                </button>
+                
+                <div class="device-detail-header">
+                    <div class="device-detail-image">
+                        <img src="https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(device.brand)}" alt="${device.name}">
+                    </div>
+                    <div class="device-detail-info">
+                        <h1>${device.name}</h1>
+                        <p class="device-brand">${device.brand}</p>
+                        
+                        <div class="device-rating" style="margin: 15px 0;">
+                            <div class="stars">
+                                ${'★'.repeat(Math.floor(device.rating))}${'☆'.repeat(5-Math.floor(device.rating))}
+                            </div>
+                            <span class="rating-value">${device.rating}/5</span>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--primary); margin: 20px 0;">
+                            ${device.price} ${device.currency}
+                        </div>
+                        
+                        <div class="device-colors" style="margin: 20px 0;">
+                            ${device.colors.map(color => `
+                                <div class="color-dot" style="background-color: ${getColorCode(color)}; width: 32px; height: 32px;" title="${color}">
+                                    <span style="font-size: 0.7rem; position: absolute; bottom: -20px; color: var(--gray);">${color}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="device-actions" style="margin-top: 30px;">
+                            <button class="btn btn-primary" style="flex: none; padding: 15px 30px;">
+                                <i class="fas fa-shopping-cart"></i> شراء الآن
+                            </button>
+                            <button class="btn btn-secondary" onclick="addToCompare(${device.id})">
+                                <i class="fas fa-balance-scale"></i> إضافة للمقارنة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    ${Object.entries(device.specs).map(([category, specs]) => `
+                        <h2 style="margin: 30px 0 20px 0; color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px;">${category}</h2>
+                        <table class="specs-table">
+                            ${Object.entries(specs).map(([key, value]) => `
+                                <tr>
+                                    <td width="40%"><strong>${key}</strong></td>
+                                    <td width="60%">${Array.isArray(value) ? value.join('، ') : value}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    `).join('')}
+                </div>
+            `;
+            
+            // التمرير لأعلى الصفحة
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // دالة للعودة للقائمة
+        function goBackToList() {
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            detailPage.style.display = 'none';
+            container.style.display = 'grid';
+        }
+
+        // دالة لإضافة جهاز للمقارنة
+        function addToCompare(deviceId) {
+            alert(`تم إضافة الجهاز للمقارنة (ID: ${deviceId})`);
+            // يمكنك إضافة منطق المقارنة هنا
+        }
+
+        // دالة للحصول على كود اللون من اسم اللون
+        function getColorCode(colorName) {
+            const colorMap = {
+                'أسود': '#000000',
+                'أبيض': '#ffffff',
+                'ذهبي': '#ffd700',
+                'أزرق': '#2563eb',
+                'رمادي': '#6b7280',
+                'بنفسجي': '#8b5cf6',
+                'أصفر': '#fbbf24',
+                'فضي': '#c0c0c0',
+                'رمادي داكن': '#374151'
+            };
+            return colorMap[colorName] || '#cccccc';
+        }
+
+        // دالة لتحميل الفئات
+        function loadCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = `
+                <button class="category-btn active" onclick="filterDevices('الكل')">
+                    <i class="fas fa-th-large"></i> الكل
+                </button>
+                ${electronicDevices.categories.map(cat => `
+                    <button class="category-btn" onclick="filterDevices('${cat.name}')">
+                        <span>${cat.icon}</span> ${cat.name}
+                    </button>
+                `).join('')}
+            `;
+        }
+
+        // دالة لتصفية الأجهزة حسب الفئة
+        function filterDevices(category) {
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            let devices;
+            if (category === 'الكل') {
+                devices = electronicDevices.getAllDevices();
+            } else {
+                devices = electronicDevices.getDevicesByCategory(category);
+            }
+            
+            displayDevices(devices);
+        }
+
+        // دالة للبحث
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', () => {
+                const results = electronicDevices.searchDevices(searchInput.value);
+                displayDevices(results);
+            });
+            
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const results = electronicDevices.searchDevices(searchInput.value);
+                    displayDevices(results);
+                }
+            });
+        }
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            displayDevices(electronicDevices.getAllDevices());
+            setupSearch();
+        });
+    </script>
+</body>
+</html><!-- ملف: index.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مواصفات الأجهزة الإلكترونية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        /* شريط البحث */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .search-box button:hover {
+            background: var(--secondary);
+        }
+
+        /* فئات الأجهزة */
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* بطاقات الأجهزة */
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 3rem 0;
+        }
+
+        .device-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-image {
+            height: 220px;
+            background: linear-gradient(45deg, #e0f2fe, #f0f9ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .device-image img {
+            max-height: 180px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .device-info {
+            padding: 1.5rem;
+        }
+
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .device-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .device-brand {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .device-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .device-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-value {
+            font-weight: 600;
+        }
+
+        .device-specs-summary {
+            margin: 15px 0;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .spec-label {
+            color: var(--gray);
+        }
+
+        .spec-value {
+            font-weight: 600;
+        }
+
+        .device-colors {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #e2e8f0;
+            cursor: pointer;
+        }
+
+        .device-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* صفحة تفاصيل الجهاز */
+        .device-detail-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .device-detail-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .device-detail-image {
+            flex: 1;
+            max-width: 400px;
+            background: linear-gradient(45deg, #e0f2fe, #f0f9ff);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .device-detail-image img {
+            max-width: 100%;
+            max-height: 400px;
+        }
+
+        .device-detail-info {
+            flex: 2;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .specs-table th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: right;
+            border-bottom: 2px solid #e2e8f0;
+            color: var(--dark);
+        }
+
+        .specs-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .specs-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* التجاوبية */
+        @media (max-width: 768px) {
+            .device-detail-header {
+                flex-direction: column;
+            }
+            
+            .device-detail-image {
+                max-width: 100%;
+            }
+            
+            .categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+
+        /* أنيميشن للتحديث */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>مواصفات الأجهزة الإلكترونية</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى الصفحة الرئيسية -->
+    <main class="container">
+        <!-- شريط البحث -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن جهاز أو ماركة...">
+                <button id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- فئات الأجهزة -->
+        <div class="categories" id="categoriesContainer">
+            <!-- سيتم إضافة الفئات ديناميكياً -->
+        </div>
+
+        <!-- عرض الأجهزة -->
+        <div id="devicesContainer" class="devices-grid">
+            <!-- سيتم إضافة الأجهزة ديناميكياً -->
+        </div>
+
+        <!-- صفحة تفاصيل الجهاز (مخفية في البداية) -->
+        <div id="deviceDetailPage" class="device-detail-container" style="display: none;">
+            <!-- سيتم ملؤها ديناميكياً -->
+        </div>
+    </main>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>مواصفات الأجهزة الإلكترونية</h3>
+                    <p>المصدر الأكثر دقة وحداثة لمواصفات الأجهزة التقنية</p>
+                </div>
+                <div>
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li>الهواتف الذكية</li>
+                        <li>اللابتوبات</li>
+                        <li>الأجهزة اللوحية</li>
+                        <li>الساعات الذكية</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>التواصل</h3>
+                    <p>support@devicespecs.com</p>
+                    <p>+966 123 456 789</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="devices-database.js"></script>
+    <script>
+        // دالة لعرض جميع الأجهزة
+        function displayDevices(devices) {
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            // إخفاء صفحة التفاصيل
+            detailPage.style.display = 'none';
+            
+            // إظهار قائمة الأجهزة
+            container.style.display = 'grid';
+            
+            container.innerHTML = devices.map(device => `
+                <div class="device-card fade-in" data-id="${device.id}">
+                    <div class="device-image">
+                        <img src="placeholder.svg" alt="${device.name}" onerror="this.src='https://via.placeholder.com/300x200/3b82f6/ffffff?text=${encodeURIComponent(device.brand)}'">
+                    </div>
+                    <div class="device-info">
+                        <div class="device-header">
+                            <div>
+                                <h3 class="device-name">${device.name}</h3>
+                                <p class="device-brand">${device.brand}</p>
+                            </div>
+                            <div class="device-price">${device.price} ${device.currency}</div>
+                        </div>
+                        
+                        <div class="device-rating">
+                            <div class="stars">
+                                ${'★'.repeat(Math.floor(device.rating))}${'☆'.repeat(5-Math.floor(device.rating))}
+                            </div>
+                            <span class="rating-value">${device.rating}</span>
+                        </div>
+                        
+                        <div class="device-specs-summary">
+                            ${Object.entries(device.specs.الأداء || device.specs.الأداء || {}).slice(0, 3).map(([key, value]) => `
+                                <div class="spec-item">
+                                    <span class="spec-label">${key}:</span>
+                                    <span class="spec-value">${Array.isArray(value) ? value[0] : value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${device.colors ? `
+                            <div class="device-colors">
+                                ${device.colors.map(color => `
+                                    <div class="color-dot" style="background-color: ${getColorCode(color)}" title="${color}"></div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="device-actions">
+                            <button class="btn btn-primary" onclick="showDeviceDetail(${device.id})">
+                                <i class="fas fa-info-circle"></i> التفاصيل
+                            </button>
+                            <button class="btn btn-secondary" onclick="addToCompare(${device.id})">
+                                <i class="fas fa-balance-scale"></i> مقارنة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // دالة لعرض تفاصيل الجهاز
+        function showDeviceDetail(deviceId) {
+            const device = electronicDevices.getDeviceById(deviceId);
+            if (!device) return;
+            
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            // إخفاء قائمة الأجهزة
+            container.style.display = 'none';
+            
+            // إظهار صفحة التفاصيل
+            detailPage.style.display = 'block';
+            detailPage.innerHTML = `
+                <button class="btn btn-secondary" onclick="goBackToList()" style="margin-bottom: 20px;">
+                    <i class="fas fa-arrow-right"></i> العودة للقائمة
+                </button>
+                
+                <div class="device-detail-header">
+                    <div class="device-detail-image">
+                        <img src="https://via.placeholder.com/400x400/3b82f6/ffffff?text=${encodeURIComponent(device.brand)}" alt="${device.name}">
+                    </div>
+                    <div class="device-detail-info">
+                        <h1>${device.name}</h1>
+                        <p class="device-brand">${device.brand}</p>
+                        
+                        <div class="device-rating" style="margin: 15px 0;">
+                            <div class="stars">
+                                ${'★'.repeat(Math.floor(device.rating))}${'☆'.repeat(5-Math.floor(device.rating))}
+                            </div>
+                            <span class="rating-value">${device.rating}/5</span>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--primary); margin: 20px 0;">
+                            ${device.price} ${device.currency}
+                        </div>
+                        
+                        <div class="device-colors" style="margin: 20px 0;">
+                            ${device.colors.map(color => `
+                                <div class="color-dot" style="background-color: ${getColorCode(color)}; width: 32px; height: 32px;" title="${color}">
+                                    <span style="font-size: 0.7rem; position: absolute; bottom: -20px; color: var(--gray);">${color}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="device-actions" style="margin-top: 30px;">
+                            <button class="btn btn-primary" style="flex: none; padding: 15px 30px;">
+                                <i class="fas fa-shopping-cart"></i> شراء الآن
+                            </button>
+                            <button class="btn btn-secondary" onclick="addToCompare(${device.id})">
+                                <i class="fas fa-balance-scale"></i> إضافة للمقارنة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    ${Object.entries(device.specs).map(([category, specs]) => `
+                        <h2 style="margin: 30px 0 20px 0; color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px;">${category}</h2>
+                        <table class="specs-table">
+                            ${Object.entries(specs).map(([key, value]) => `
+                                <tr>
+                                    <td width="40%"><strong>${key}</strong></td>
+                                    <td width="60%">${Array.isArray(value) ? value.join('، ') : value}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    `).join('')}
+                </div>
+            `;
+            
+            // التمرير لأعلى الصفحة
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // دالة للعودة للقائمة
+        function goBackToList() {
+            const container = document.getElementById('devicesContainer');
+            const detailPage = document.getElementById('deviceDetailPage');
+            
+            detailPage.style.display = 'none';
+            container.style.display = 'grid';
+        }
+
+        // دالة لإضافة جهاز للمقارنة
+        function addToCompare(deviceId) {
+            alert(`تم إضافة الجهاز للمقارنة (ID: ${deviceId})`);
+            // يمكنك إضافة منطق المقارنة هنا
+        }
+
+        // دالة للحصول على كود اللون من اسم اللون
+        function getColorCode(colorName) {
+            const colorMap = {
+                'أسود': '#000000',
+                'أبيض': '#ffffff',
+                'ذهبي': '#ffd700',
+                'أزرق': '#2563eb',
+                'رمادي': '#6b7280',
+                'بنفسجي': '#8b5cf6',
+                'أصفر': '#fbbf24',
+                'فضي': '#c0c0c0',
+                'رمادي داكن': '#374151'
+            };
+            return colorMap[colorName] || '#cccccc';
+        }
+
+        // دالة لتحميل الفئات
+        function loadCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = `
+                <button class="category-btn active" onclick="filterDevices('الكل')">
+                    <i class="fas fa-th-large"></i> الكل
+                </button>
+                ${electronicDevices.categories.map(cat => `
+                    <button class="category-btn" onclick="filterDevices('${cat.name}')">
+                        <span>${cat.icon}</span> ${cat.name}
+                    </button>
+                `).join('')}
+            `;
+        }
+
+        // دالة لتصفية الأجهزة حسب الفئة
+        function filterDevices(category) {
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            let devices;
+            if (category === 'الكل') {
+                devices = electronicDevices.getAllDevices();
+            } else {
+                devices = electronicDevices.getDevicesByCategory(category);
+            }
+            
+            displayDevices(devices);
+        }
+
+        // دالة للبحث
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', () => {
+                const results = electronicDevices.searchDevices(searchInput.value);
+                displayDevices(results);
+            });
+            
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const results = electronicDevices.searchDevices(searchInput.value);
+                    displayDevices(results);
+                }
+            });
+        }
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            displayDevices(electronicDevices.getAllDevices());
+            setupSearch();
+        });
+    </script>
+</body>
+</html>
