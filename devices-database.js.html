@@ -1,173 +1,212 @@
-// ملف: devices-database.js
-/**
- * قاعدة بيانات مواصفات الأجهزة الإلكترونية
- * يمكن توسيعها بسهولة بإضافة أجهزة جديدة
- */
-
-const electronicDevices = {
-  categories: [
-    { id: 1, name: "الهواتف الذكية", icon: "📱" },
-    { id: 2, name: "اللابتوبات", icon: "💻" },
-    { id: 3, name: "الأجهزة اللوحية", icon: "📱" },
-    { id: 4, name: "الساعات الذكية", icon: "⌚" },
-    { id: 5, name: "السماعات", icon: "🎧" }
-  ],
-
-  // مصفوفة تحتوي على جميع الأجهزة
-  devices: [
-    {
-      id: 1,
-      category: "الهواتف الذكية",
-      name: "iPhone 15 Pro",
-      brand: "Apple",
-      image: "iphone15-pro.jpg",
-      price: 4499,
-      currency: "ريال",
-      rating: 4.8,
-      specs: {
-        عام: {
-          "تاريخ الإصدار": "سبتمبر 2023",
-          "نظام التشغيل": "iOS 17",
-          "الأبعاد": "146.6 × 70.6 × 8.3 ملم",
-          "الوزن": "187 جرام"
-        },
-        الشاشة: {
-          "الحجم": "6.1 بوصة",
-          "النوع": "Super Retina XDR",
-          "الدقة": "2556 × 1179 بكسل",
-          "التحديث": "120 هرتز"
-        },
-        الأداء: {
-          "المعالج": "A17 Pro",
-          "الذاكرة العشوائية": "8 جيجابايت",
-          "التخزين الداخلي": ["256 جيجابايت", "512 جيجابايت", "1 تيرا"]
-        },
-        الكاميرا: {
-          "الخلفية الرئيسية": "48 ميجابكسل",
-          "الواسعة الزاوية": "12 ميجابكسل",
-          "التلسكوبية": "12 ميجابكسل",
-          "الأمامية": "12 ميجابكسل"
-        },
-        البطارية: {
-          "السعة": "3500 مللي أمبير",
-          "الشحن السريع": "نعم (20 واط)",
-          "الشحن اللاسلكي": "نعم"
-        }
-      },
-      colors: ["أسود", "أبيض", "ذهبي", "أزرق"],
-      inStock: true
-    },
-    {
-      id: 2,
-      category: "الهواتف الذكية",
-      name: "Samsung Galaxy S24 Ultra",
-      brand: "Samsung",
-      image: "s24-ultra.jpg",
-      price: 4999,
-      currency: "ريال",
-      rating: 4.7,
-      specs: {
-        عام: {
-          "تاريخ الإصدار": "يناير 2024",
-          "نظام التشغيل": "Android 14",
-          "الأبعاد": "162.3 × 79 × 8.6 ملم",
-          "الوزن": "232 جرام"
-        },
-        الشاشة: {
-          "الحجم": "6.8 بوصة",
-          "النوع": "Dynamic AMOLED 2X",
-          "الدقة": "3088 × 1440 بكسل",
-          "التحديث": "120 هرتز"
-        },
-        الأداء: {
-          "المعالج": "Snapdragon 8 Gen 3",
-          "الذاكرة العشوائية": "12 جيجابايت",
-          "التخزين الداخلي": ["256 جيجابايت", "512 جيجابايت", "1 تيرا"]
-        },
-        الكاميرا: {
-          "الرئيسية": "200 ميجابكسل",
-          "التلسكوبية": "50 ميجابكسل",
-          "الواسعة": "12 ميجابكسل",
-          "الأمامية": "12 ميجابكسل"
-        },
-        البطارية: {
-          "السعة": "5000 مللي أمبير",
-          "الشحن السريع": "45 واط",
-          "الشحن اللاسلكي": "نعم"
-        }
-      },
-      colors: ["أسود", "رمادي", "بنفسجي", "أصفر"],
-      inStock: true
-    },
-    {
-      id: 3,
-      category: "اللابتوبات",
-      name: "MacBook Pro 16",
-      brand: "Apple",
-      image: "macbook-pro-16.jpg",
-      price: 10999,
-      currency: "ريال",
-      rating: 4.9,
-      specs: {
-        عام: {
-          "تاريخ الإصدار": "أكتوبر 2023",
-          "نظام التشغيل": "macOS Sonoma",
-          "الأبعاد": "35.57 × 24.81 × 1.68 سم",
-          "الوزن": "2.16 كجم"
-        },
-        الشاشة: {
-          "الحجم": "16.2 بوصة",
-          "النوع": "Liquid Retina XDR",
-          "الدقة": "3456 × 2234 بكسل",
-          "التحديث": "120 هرتز"
-        },
-        الأداء: {
-          "المعالج": "M3 Max",
-          "النواة": "14-core CPU, 30-core GPU",
-          "الذاكرة العشوائية": "36 جيجابايت",
-          "التخزين": ["1 تيرا SSD", "2 تيرا SSD", "4 تيرا SSD"]
-        },
-        البطارية: {
-          "السعة": "100 واط/ساعة",
-          "العمر": "حتى 22 ساعة",
-          "الشحن السريع": "140 واط"
-        },
-        المنافذ: {
-          "Thunderbolt 4": "3 منافذ",
-          "HDMI": "منفذ واحد",
-          "SDXC": "منفذ بطاقة SD",
-          "USB-A": "غير متوفر"
-        }
-      },
-      colors: ["فضي", "رمادي داكن"],
-      inStock: true
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>سجل الألقاب</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      background: #050816;
+      color: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 0;
     }
-  ],
+    header {
+      padding: 20px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      border-bottom: 1px solid #374151;
+    }
+    h1 { margin: 0; font-size: 26px; }
+    main { max-width: 800px; margin: 20px auto; padding: 15px; }
+    .card {
+      background: #111827;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #1f2937;
+    }
+    input[type="text"] {
+      width: 80%;
+      max-width: 350px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #f9fafb;
+      outline: none;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #38bdf8;
+      color: #020617;
+      font-size: 14px;
+      margin: 5px;
+    }
+    .hidden { display: none; }
+    .status { margin-top: 8px; font-weight: bold; font-size: 14px; }
+    .taken { color: #f97316; }
+    .free { color: #22c55e; }
+    ul { list-style: none; padding: 0; margin: 0; text-align: right; font-size: 14px; }
+    li { padding: 2px 0; }
+  </style>
+</head>
+<body>
 
-  // دالة للحصول على جميع الأجهزة
-  getAllDevices: function() {
-    return this.devices;
-  },
+<header>
+  <h1>سِجل الألقاب</h1>
+</header>
 
-  // دالة للحصول على الأجهزة حسب الفئة
-  getDevicesByCategory: function(category) {
-    return this.devices.filter(device => device.category === category);
-  },
+<main>
+  <section class="card">
+    <h2>بحث / تعديل</h2>
 
-  // دالة للبحث عن جهاز
-  searchDevices: function(query) {
-    const searchTerm = query.toLowerCase();
-    return this.devices.filter(device => 
-      device.name.toLowerCase().includes(searchTerm) ||
-      device.brand.toLowerCase().includes(searchTerm)
-    );
-  },
+    <!-- البحث المباشر مثل Excel -->
+    <input id="nicknameInput" type="text" placeholder="اكتب للبحث..." oninput="liveSearch()">
 
-  // دالة للحصول على جهاز بواسطة ID
-  getDeviceById: function(id) {
-    return this.devices.find(device => device.id === id);
+    <br>
+
+    <!-- أزرار التعديل (مخفية) -->
+    <button id="addBtn" class="hidden" onclick="addNickname()">إضافة</button>
+    <button id="deleteBtn" class="hidden" onclick="deleteNickname()">حذف</button>
+
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="card">
+    <h2>الألقاب المحفوظة</h2>
+    <ul id="list"></ul>
+  </section>
+</main>
+
+<footer>
+  ~『𝑲.𝑵.𝑯⊰❄️⊱𝑺𝑵𝑶𝑾』~
+</footer>
+
+<script>
+  const secretCode = "#snow"; // الكود السري
+
+  // تحميل القائمة من التخزين
+  let nicknames = JSON.parse(localStorage.getItem("nicknames")) || [
+    "ارثر 🍸","اسكانور","اشبيرون 🌙","ال","اميرة العلكه","انتاريس","انيا","انيوشا",
+    "اوليفر 🍀","ايانوكوجي","ايتادوري","ايتاشي","ايتشيغو","ايسديث 🌝","ايشيشا","ايرين","ايميليا",
+    "باتشيرا","باجي 👑","باين","بروك","بيم","بيكاتشو",
+    "تاتسومي","تانجيرو","توجي ⚔️","توشيرو ☁️","توكيتو 📜",
+    "جارب","جاي هوان","جوست","جين موري",
+    "دابي","داكيو","دانيال","دلتا","دوما ❄️",
+    "روبي","ريو","رينغوكو","رينهارد","ريون 🐺",
+    "زورو 🥂",
+    "ساسكي 👁️","ساشا","ساكاموتو","سايتما","سكارليت","سوكونا","سونغ","سيلفر","سينشي 🕵️",
+    "شادو","شانكس","شوتو","شيزوكو","شيكامارو","شينوبو",
+    "غابريلا","غوجيتا","غوكو","غون","غيو","غيوتارو",
+    "فانتياس","فيتان ☠️",
+    "كايزر 🏹","كاكاشي","كايل","كوشينا","كيزارو","كيلوا ⚡","كونان 🔎",
+    "لاو","ليفاي","ليوريو",
+    "ماو ماو","موزان 🩸","ميدوريا","ميغومي🧧","ميكاسا","ميمي 🎀","ميهوك 🦅","ماكي",
+    "ناغي 🎯","نيجي","نيزكو 🌸",
+    "هانكوك","هوشينو","هيستوريا",
+    "ويليام",
+    "يامادا 🎭","يامي","ياشيرو","يواشيرو","يور"
+  ];
+
+  function save() {
+    localStorage.setItem("nicknames", JSON.stringify(nicknames));
   }
-};
 
-// تصدير قاعدة البيانات للاستخدام
-export default electronicDevices;
+  function renderList(filtered = null) {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    let data = filtered || nicknames;
+    data.sort((a, b) => a.localeCompare(b, "ar"));
+
+    data.forEach(n => {
+      const li = document.createElement("li");
+      li.textContent = "⧝┊" + n;
+      list.appendChild(li);
+    });
+  }
+
+  // 🔍 بحث مباشر مثل Excel
+  function liveSearch() {
+    const input = document.getElementById("nicknameInput");
+    const text = input.value.trim().toLowerCase();
+    const status = document.getElementById("status");
+
+    // تفعيل وضع التعديل
+    if (text === secretCode) {
+      document.getElementById("addBtn").classList.remove("hidden");
+      document.getElementById("deleteBtn").classList.remove("hidden");
+      status.textContent = "تم تفعيل وضع التعديل.";
+      status.className = "status free";
+      return;
+    }
+
+    // فلترة
+    const filtered = nicknames.filter(n => n.toLowerCase().includes(text));
+
+    renderList(filtered);
+
+    if (filtered.length === 0) {
+      status.textContent = "لا يوجد نتائج.";
+      status.className = "status taken";
+    } else {
+      status.textContent = "";
+    }
+  }
+
+  function addNickname() {
+    const input = document.getElementById("nicknameInput");
+    const name = input.value.trim();
+    const status = document.getElementById("status");
+
+    if (!name) {
+      status.textContent = "اكتب لقب لإضافته.";
+      return;
+    }
+
+    nicknames.push(name);
+    save();
+    renderList();
+
+    status.textContent = "تم إضافة اللقب «" + name + "».";
+    status.className = "status free";
+    input.value = "";
+  }
+
+  function deleteNickname() {
+    const input = document.getElementById("nicknameInput");
+    const name = input.value.trim();
+    const status = document.getElementById("status");
+
+    if (!name) {
+      status.textContent = "اكتب لقب لحذفه.";
+      return;
+    }
+
+    const index = nicknames.findIndex(n => n.toLowerCase() === name.toLowerCase());
+
+    if (index === -1) {
+      status.textContent = "اللقب غير موجود.";
+      status.className = "status taken";
+      return;
+    }
+
+    nicknames.splice(index, 1);
+    save();
+    renderList();
+
+    status.textContent = "تم حذف اللقب «" + name + "».";
+    status.className = "status free";
+    input.value = "";
+  }
+
+  renderList();
+</script>
+
+</body>
+  </html>
